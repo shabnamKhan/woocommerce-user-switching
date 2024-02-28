@@ -113,13 +113,25 @@ class Woocommerce_User_Switching_Admin
 
         $order    = wc_get_order($post->ID);
         $customer = $order->get_user();
-        $link = user_switching::maybe_switch_url($customer);
+       if($customer)
+       {
+   
+            $link = user_switching::maybe_switch_url($customer);
+     
 
-        echo sprintf(
-            '<a href="%s">%s</a>',
-            esc_url($link),
-            esc_html__('Switch&nbsp;to&nbsp;' . $customer->display_name, 'user-switching')
-        );
+            echo sprintf(
+                '<a href="%s">%s</a>',
+                esc_url($link),
+                esc_html__('Switch&nbsp;to&nbsp;' . $customer->display_name, 'user-switching')
+            );
+       }
+       else
+       {
+            echo sprintf(
+                'User Not Assigned Yet'
+            );
+           
+        }
     }
 
     /**
